@@ -1,6 +1,6 @@
 class Message
   def self.all_from(me, from)
-    Nest.new("caye")[me][from].lrange(0, -1).map do |message|
+    Nest.new("caye", $redis)[me][from].lrange(0, -1).map do |message|
       JSON.parse(message)
     end
   end
