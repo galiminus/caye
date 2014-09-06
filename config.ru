@@ -3,7 +3,6 @@ require File.expand_path('../caye', __FILE__)
 
 Dir["#{File.expand_path('../lib', __FILE__)}/**/*.rb"].each do |file|
   require file
-  p file
 end
 
 use Faye::RackAdapter, :mount      => '/faye',
