@@ -17,7 +17,7 @@ class Caye < Sinatra::Base
   helpers Sinatra::JSON
 
   before do
-    headers['Access-Control-Allow-Methods'] = 'GET, POST'
+    headers['Access-Control-Allow-Methods'] = 'GET'
     headers['Access-Control-Allow-Origin'] = '*'
     headers['Access-Control-Allow-Headers'] = 'accept, authorization, origin'
   end
@@ -26,7 +26,7 @@ class Caye < Sinatra::Base
     json Message.all(params[:me], params[:to])
   end
 
-  get "/users" do
+  get "/presences" do
     json User.all
   end
 end
