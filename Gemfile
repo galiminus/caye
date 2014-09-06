@@ -8,3 +8,5 @@ gem "sinatra-contrib"
 
 gem "redis"
 gem "nest"
+
+gem "activesupport"

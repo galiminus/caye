@@ -1,7 +1,18 @@
 class User
   def self.all
-    Nest.new("caye", $redis)["users"].smembers.map do |user|
+    $redis["users"].smembers.map do |user|
       { from: user }
+    end
+  end
+
+  def self.store(params)
+    $redis["users"].sadd params["from"] if valid?(params)
+  end
+
+  private
+  def self.valid?(params)
+    %w[from].all? do |param|
+      params.try(:[], param)
     end
   end
 end

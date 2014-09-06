@@ -1,13 +1,23 @@
 class Message
-  def self.all_from(me, from)
-    Nest.new("caye", $redis)[me][from].lrange(0, -1).map do |message|
+  def self.all(params)
+    path(params).zrangebyscore(params[:start].to_i, "(#{params[:end].to_i}").map do |message|
       JSON.parse(message)
     end
   end
 
-  def self.all(me, from)
-    (all_from(me, from) + all_from(from, me)).sort do |message1, message2|
-      message1["timestamp"] <=> message2["timestamp"]
+  def self.store(params)
+    path(params).zadd(params["timestamp"], params.to_json) if valid?(params)
+  end
+
+  private
+
+  def self.valid?(params)
+    %w[from to timestamp body].all? do |param|
+      params.try(:[], param)
     end
+  end
+
+  def self.path(params)
+    params['from'] < params['to'] ? $redis[params['from']][params['to']] : $redis[params['to']][params['from']]
   end
 end

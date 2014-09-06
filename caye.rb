@@ -22,8 +22,8 @@ class Caye < Sinatra::Base
     headers['Access-Control-Allow-Headers'] = 'accept, authorization, origin'
   end
 
-  get "/users/:me/messages/:to" do
-    json Message.all(params[:me], params[:to])
+  get "/conversations/:from/:to" do
+    json Message.all(params)
   end
 
   get "/presences" do

@@ -1,8 +1,6 @@
 class StoreUsers
   def incoming(message, callback)
-    if message["data"] && message["data"]["from"]
-      Nest.new("caye", $redis)["users"].sadd message["data"]["from"]
-    end
+    User.store message["data"]
     callback.call(message)
   end
 end
