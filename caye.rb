@@ -1,8 +1,6 @@
 require 'sinatra/base'
 require 'sinatra/json'
 
-require 'slim'
-
 require 'faye'
 
 require 'nest'
