@@ -11,5 +11,5 @@ $redis = Nest.new("caye", Redis.new(url: ENV["REDISCLOUD_URL"]))
 
 use Faye::RackAdapter, :mount      => '/faye',
                        :timeout    => 25,
-                       :extensions => [StoreUsers.new, StoreMessages.new]
+                       :extensions => [StoreMessages.new]
 run Caye

@@ -25,9 +25,5 @@ class Caye < Sinatra::Base
   get "/conversations/:from/:to" do
     json Message.all(params)
   end
-
-  get "/presences" do
-    json User.all
-  end
 end
 
